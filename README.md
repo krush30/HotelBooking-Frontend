@@ -65,6 +65,4 @@ The frontend interacts with the backend via RESTful APIs. Example:
 - `POST /listings` - Create a new listing
 - `POST /auth/login` - User authentication
 
-## Contributing
 
-Feel free to submit issues and pull requests! 🚀
