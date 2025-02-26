@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import ListingModal from "@/app/components/customer/ListingModal";
+import Image from "next/image";
 // import { useRouter } from "next/navigation";
 
 export default function HomePage() {
@@ -12,7 +13,7 @@ export default function HomePage() {
     description?: string;
     facilities?: string[];
     pricing?: Record<string, number>;
-    images?: string;
+    images?: string[];
     rating?: number;
     createdAt?: string;
   }
@@ -126,15 +127,15 @@ export default function HomePage() {
                 key={listing.id}
                 className="bg-white rounded-lg shadow-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl"
               >
-                <img
+                <Image
                   src={
-                    `${process.env.NEXT_PUBLIC_API_URL}${
-                      listing.images?.split(",")[0]
-                    }` || "/images/default.jpg"
+                    listing.images && listing.images.length > 0
+                      ? `${process.env.NEXT_PUBLIC_API_URL}${listing.images[0]}`
+                      : "/images/default.jpg"
                   }
                   alt={listing.name}
-                  // width={400}
-                  // height={250}
+                  width={400}
+                  height={250}
                   className="w-full h-52 object-cover"
                 />
                 <div className="p-4">

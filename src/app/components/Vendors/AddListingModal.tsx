@@ -1,5 +1,6 @@
 "use client";
 import { ListingData } from "@/app/dashboard/vendor/page";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function AddListingModal({
@@ -76,9 +77,9 @@ export default function AddListingModal({
 
   // Upload images to the backend
   const uploadImages = async () => {
-    if (selectedFiles.length === 0) return [];
+    if (selectedFiles.length === 0) return "";
 
-    const uploadedImageUrls: string[] = await Promise.all(
+    const uploadedImageUrls = await Promise.all(
       selectedFiles.map(async (file) => {
         const formData = new FormData();
 
@@ -248,10 +249,12 @@ export default function AddListingModal({
             <div className="grid grid-cols-4 gap-2 mt-2">
               {imagePreviews.map((src, idx) => (
                 <div key={idx} className="relative">
-                  <img
+                  <Image
                     src={src}
                     alt="Preview"
-                    className="w-20 h-20 object-cover rounded-lg"
+                    width={80}
+                    height={80}
+                    className="object-cover rounded-lg"
                   />
                   <button
                     onClick={() => removeImage(idx)}

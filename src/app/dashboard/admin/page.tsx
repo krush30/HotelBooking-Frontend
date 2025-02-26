@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
-  const [adminName, setAdminName] = useState<string | null>(null);
+  // const [adminName, setAdminName] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -16,25 +16,25 @@ export default function AdminDashboard() {
     }
 
     // Fetch admin details (Mock API call or real API)
-    const fetchAdminDetails = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/admin/me`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        const data = await response.json();
-        if (response.ok) {
-          setAdminName(data.name);
-        } else {
-          router.push("/login");
-        }
-      } catch (error) {
-        console.error("Error fetching admin data:", error);
-        router.push("/login");
-      }
-    };
+    // const fetchAdminDetails = async () => {
+    //   try {
+    //     const response = await fetch(
+    //       `${process.env.NEXT_PUBLIC_API_URL}/admin/me`,
+    //       {
+    //         headers: { Authorization: `Bearer ${token}` },
+    //       }
+    //     );
+    //     const data = await response.json();
+    //     if (response.ok) {
+    //       setAdminName(data.name);
+    //     } else {
+    //       router.push("/login");
+    //     }
+    //   } catch (error) {
+    //     console.error("Error fetching admin data:", error);
+    //     router.push("/login");
+    //   }
+    // };
 
     // fetchAdminDetails();
   }, [router]);
