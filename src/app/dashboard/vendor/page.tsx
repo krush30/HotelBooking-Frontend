@@ -32,7 +32,7 @@ export default function VendorDashboard() {
   const handleAddListing = async (data: ListingData): Promise<void> => {
     try {
       const token =
-        typeof window !== "undefined" ? localStorage.getItem("token") : null;
+        typeof window != "undefined" ? localStorage.getItem("token") : null;
       if (!token) {
         router.push("/auth/login");
         return;
@@ -63,11 +63,11 @@ export default function VendorDashboard() {
 
   useEffect(() => {
     const token =
-      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+      typeof window != "undefined" ? localStorage.getItem("token") : null;
     const role =
-      typeof window !== "undefined" ? localStorage.getItem("role") : null;
+      typeof window != "undefined" ? localStorage.getItem("role") : null;
     const user =
-      typeof window !== "undefined" ? localStorage.getItem("user") : null;
+      typeof window != "undefined" ? localStorage.getItem("user") : null;
 
     if (!token || role !== "vendor") {
       router.push("/auth/login");
