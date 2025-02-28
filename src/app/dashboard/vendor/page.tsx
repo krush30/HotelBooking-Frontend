@@ -32,7 +32,7 @@ export default function VendorDashboard() {
   const handleAddListing = async (data: ListingData): Promise<void> => {
     try {
       console.log(data);
-
+      if (typeof window === "undefined") return;
       const token = localStorage.getItem("token"); // Get JWT token from localStorage
       if (!token) {
         router.push("/auth/login");

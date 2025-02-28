@@ -29,6 +29,7 @@ const Page = () => {
       if (!vendorId) return;
 
       try {
+        if (typeof window === "undefined") return;
         const token = localStorage.getItem("token");
         if (!token) throw new Error("No token found");
 

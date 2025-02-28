@@ -48,6 +48,7 @@ const ListingModal: React.FC<ListingModalProps> = ({
   useEffect(() => {
     // const token = localStorage.getItem("token");
     // const role = localStorage.getItem("role");
+    if (typeof window === "undefined") return;
     const user = localStorage.getItem("user");
 
     if (user) {

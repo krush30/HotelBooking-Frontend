@@ -21,6 +21,8 @@ export default function VendorListingsModal() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
+        if (typeof window === "undefined") return;
+
         const token = localStorage.getItem("token");
         if (!token) {
           router.push("/auth/login");
@@ -30,9 +32,7 @@ export default function VendorListingsModal() {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/listings?vendorId=${vendorId}`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
           }
         );
 
@@ -51,7 +51,7 @@ export default function VendorListingsModal() {
       }
     };
 
-    fetchListings();
+    if (vendorId) fetchListings();
   }, [vendorId]);
 
   return (

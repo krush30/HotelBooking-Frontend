@@ -9,6 +9,7 @@ export default function VendorHeader() {
   const vendor = JSON.parse(localStorage.getItem("user") ?? "");
 
   const handleLogout = () => {
+    if (typeof window === "undefined") return;
     localStorage.removeItem("token"); // Remove JWT token
     router.push("/auth/login"); // Redirect to login
   };

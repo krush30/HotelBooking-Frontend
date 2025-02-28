@@ -36,6 +36,7 @@ export default function CustomerBookingsComponent() {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
+        if (typeof window === "undefined") return;
         const token = localStorage.getItem("token");
         if (!token) {
           router.push("/auth/login");

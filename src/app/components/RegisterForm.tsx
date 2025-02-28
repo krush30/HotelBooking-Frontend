@@ -18,6 +18,7 @@ export default function Register() {
 
   // Redirect if user is already logged in
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const token = localStorage.getItem("token");
     const userRole = localStorage.getItem("role");
 

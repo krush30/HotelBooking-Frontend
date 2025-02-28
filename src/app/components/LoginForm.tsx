@@ -15,6 +15,7 @@ export default function Login() {
 
   // Check if user is already logged in and redirect them to their dashboard
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
 

@@ -8,6 +8,7 @@ export default function CustomerHeader() {
   const router = useRouter();
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const storedUser = JSON.parse(localStorage.getItem("user") || "null");
     if (storedUser) setUser(storedUser);
   }, []);
