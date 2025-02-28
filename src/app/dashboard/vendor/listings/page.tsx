@@ -2,13 +2,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface VendorListingsModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  vendorId: string;
-}
-
-export default function VendorListingsModal({}: VendorListingsModalProps) {
+export default function VendorListingsModal() {
   interface Listing {
     id: string;
     name: string;
