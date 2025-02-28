@@ -14,21 +14,22 @@ export default function VendorListingsModal() {
 
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState<string | null>(null);
 
   const searchParams = useSearchParams();
   const vendorId = searchParams.get("vendorId");
-  const router = useRouter();
+  // Fetch token after component mounts
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
+
   useEffect(() => {
     const fetchListings = async () => {
+      if (!token || !vendorId) return; // Ensure token is available
+
       try {
-        const token =
-          typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
-        if (!token) {
-          router.push("/auth/login");
-          return;
-        }
-
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/listings?vendorId=${vendorId}`,
           {
@@ -41,7 +42,7 @@ export default function VendorListingsModal() {
         const data = await response.json();
         setListings(
           data.filter(
-            (listing: Listing) => listing.vendorId === parseInt(vendorId!)
+            (listing: Listing) => listing.vendorId === parseInt(vendorId)
           )
         );
       } catch (error) {
@@ -51,8 +52,8 @@ export default function VendorListingsModal() {
       }
     };
 
-    if (vendorId) fetchListings();
-  }, [vendorId]);
+    fetchListings();
+  }, [token, vendorId]);
 
   return (
     <>
