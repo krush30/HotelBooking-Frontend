@@ -1,5 +1,5 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface VendorListingsModalProps {
@@ -15,6 +15,7 @@ export default function VendorListingsModal({}: VendorListingsModalProps) {
     address: string;
     pricing: number;
     facilities: string[];
+    vendorId: number;
   }
 
   const [listings, setListings] = useState<Listing[]>([]);
@@ -22,11 +23,15 @@ export default function VendorListingsModal({}: VendorListingsModalProps) {
 
   const searchParams = useSearchParams();
   const vendorId = searchParams.get("vendorId");
+  const router = useRouter();
   useEffect(() => {
     const fetchListings = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token) throw new Error("No token found");
+        if (!token) {
+          router.push("/auth/login");
+          return;
+        }
 
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/listings?vendorId=${vendorId}`,
@@ -40,7 +45,11 @@ export default function VendorListingsModal({}: VendorListingsModalProps) {
         if (!response.ok) throw new Error("Failed to fetch listings");
 
         const data = await response.json();
-        setListings(data);
+        setListings(
+          data.filter(
+            (listing: Listing) => listing.vendorId === parseInt(vendorId!)
+          )
+        );
       } catch (error) {
         console.error("Error fetching listings:", error);
       } finally {

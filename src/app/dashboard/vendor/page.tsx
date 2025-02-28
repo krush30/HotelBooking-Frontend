@@ -34,7 +34,7 @@ export default function VendorDashboard() {
 
       const token = localStorage.getItem("token"); // Get JWT token from localStorage
       if (!token) {
-        console.error("No JWT token found! User must be authenticated.");
+        router.push("/auth/login");
         return;
       }
 

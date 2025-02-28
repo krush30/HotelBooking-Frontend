@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import ListingModal from "@/app/components/customer/ListingModal";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 // import { useRouter } from "next/navigation";
 
@@ -24,12 +25,17 @@ export default function HomePage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [filter, setFilter] = useState("all");
   const [sortOrder, setSortOrder] = useState("desc");
-  // const router = useRouter();
+  const [defaultImage, setDefaultImage] = useState("restaurant.jpg");
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchListings = async () => {
       try {
         const token = localStorage.getItem("token");
+        if (!token) {
+          router.push("/auth/login");
+        }
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/listings`,
           {
@@ -91,7 +97,10 @@ export default function HomePage() {
                 ? "bg-orange-500 text-white scale-105 shadow-lg"
                 : "bg-gray-200 hover:bg-gray-300"
             }`}
-            onClick={() => setFilter("Restaurant")}
+            onClick={() => {
+              setFilter("Restaurant");
+              setDefaultImage("restaurant.jpg");
+            }}
           >
             🍽️ Dine In
           </button>
@@ -101,7 +110,10 @@ export default function HomePage() {
                 ? "bg-blue-500 text-white scale-105 shadow-lg"
                 : "bg-gray-200 hover:bg-gray-300"
             }`}
-            onClick={() => setFilter("Hotel")}
+            onClick={() => {
+              setFilter("Hotel");
+              setDefaultImage("hotel.jpg");
+            }}
           >
             🏨 Stay In
           </button>
@@ -128,16 +140,18 @@ export default function HomePage() {
                 className="bg-white rounded-lg shadow-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl"
               >
                 <Image
-                  src={
-                    listing.images && listing.images.length > 0
-                      ? `${process.env.NEXT_PUBLIC_API_URL}${listing.images[0]}`
-                      : "/images/default.jpg"
-                  }
+                  // src={
+                  //   listing.images && listing.images.length > 0
+                  //     ? `/${listing.images[0]}`
+                  //     : defaultImage
+                  // }
+                  src={`/${defaultImage}`}
                   alt={listing.name}
                   width={400}
                   height={250}
                   className="w-full h-52 object-cover"
                 />
+
                 <div className="p-4">
                   <h3 className="text-2xl font-bold text-gray-800">
                     {listing.name}

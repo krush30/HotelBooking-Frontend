@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Register() {
@@ -15,6 +15,18 @@ export default function Register() {
     password: string;
     role: string;
   }
+
+  // Redirect if user is already logged in
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userRole = localStorage.getItem("role");
+
+    if (token && userRole) {
+      if (userRole === "customer") router.replace("/dashboard/customer");
+      if (userRole === "vendor") router.replace("/dashboard/vendor");
+      if (userRole === "admin") router.replace("/dashboard/admin");
+    }
+  }, [router]);
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

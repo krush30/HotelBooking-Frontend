@@ -1,6 +1,6 @@
-// src/app/(auth)/login.tsx
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
@@ -12,6 +12,18 @@ export default function Login() {
     email: string;
     password: string;
   }
+
+  // Check if user is already logged in and redirect them to their dashboard
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    if (token && role) {
+      if (role === "customer") router.push("/dashboard/customer");
+      if (role === "vendor") router.push("/dashboard/vendor");
+      if (role === "admin") router.push("/dashboard/admin");
+    }
+  }, [router]); // Runs once when component mounts
 
   const handleLogin = async (
     e: React.FormEvent<HTMLFormElement>

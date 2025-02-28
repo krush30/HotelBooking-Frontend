@@ -6,7 +6,7 @@ export default function AdminLayout({
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <aside className="w-64 bg-blue-600 text-white p-6">
+      {/* <aside className="w-64 bg-blue-600 text-white p-6">
         <h2 className="text-2xl font-bold">Admin Panel</h2>
         <ul className="mt-6 space-y-4">
           <li>
@@ -34,7 +34,7 @@ export default function AdminLayout({
             </a>
           </li>
         </ul>
-      </aside>
+      </aside> */}
 
       {/* Main Content */}
       <main className="flex-1 p-6">{children}</main>

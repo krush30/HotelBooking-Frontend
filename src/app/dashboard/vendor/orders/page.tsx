@@ -1,5 +1,5 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface Booking {
@@ -22,6 +22,7 @@ const Page = () => {
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const vendorId = searchParams.get("vendorId");
+  const router = useRouter();
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -57,7 +58,10 @@ const Page = () => {
   const handleStatusChange = async (bookingId: string, newStatus: string) => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) throw new Error("No token found");
+      if (!token) {
+        router.push("/auth/login");
+        return;
+      }
 
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/bookings/${bookingId}`,
