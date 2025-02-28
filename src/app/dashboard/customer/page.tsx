@@ -32,8 +32,8 @@ export default function HomePage() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        if (typeof window === "undefined") return;
-        const token = localStorage.getItem("token");
+        const token =
+          typeof window !== "undefined" ? localStorage.getItem("token") : null;
         if (!token) {
           router.push("/auth/login");
         }

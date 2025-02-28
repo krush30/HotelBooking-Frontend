@@ -31,9 +31,8 @@ export default function VendorDashboard() {
 
   const handleAddListing = async (data: ListingData): Promise<void> => {
     try {
-      console.log(data);
-      if (typeof window === "undefined") return;
-      const token = localStorage.getItem("token"); // Get JWT token from localStorage
+      const token =
+        typeof window !== "undefined" ? localStorage.getItem("token") : null;
       if (!token) {
         router.push("/auth/login");
         return;
@@ -63,9 +62,12 @@ export default function VendorDashboard() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-    const user = localStorage.getItem("user");
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    const role =
+      typeof window !== "undefined" ? localStorage.getItem("role") : null;
+    const user =
+      typeof window !== "undefined" ? localStorage.getItem("user") : null;
 
     if (!token || role !== "vendor") {
       router.push("/auth/login");

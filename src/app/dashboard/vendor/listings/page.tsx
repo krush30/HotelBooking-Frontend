@@ -21,9 +21,9 @@ export default function VendorListingsModal() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        if (typeof window === "undefined") return;
+        const token =
+          typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-        const token = localStorage.getItem("token");
         if (!token) {
           router.push("/auth/login");
           return;

@@ -26,8 +26,8 @@ export default function AdminDashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const token = localStorage.getItem("token");
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
     // const role = localStorage.getItem("role");
 
     if (!token) {

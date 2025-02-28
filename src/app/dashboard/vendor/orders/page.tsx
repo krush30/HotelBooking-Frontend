@@ -29,8 +29,8 @@ const Page = () => {
       if (!vendorId) return;
 
       try {
-        if (typeof window === "undefined") return;
-        const token = localStorage.getItem("token");
+        const token =
+          typeof window !== "undefined" ? localStorage.getItem("token") : null;
         if (!token) throw new Error("No token found");
 
         const response = await fetch(
