@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import AddListingModal from "@/app/components/Vendors/AddListingModal";
 // import VendorListingsModal from "@/app/components/Vendors/ViewVendorListing";
 import AddUnitsModal from "@/app/components/Vendors/AddUnitsModal";
+import { FaHotel } from "react-icons/fa";
 export interface ListingData {
   type: string;
   name: string;
@@ -158,26 +159,29 @@ export default function VendorDashboard() {
 
           {/* Stats/Quick Info Section */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-white shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-lg font-semibold text-gray-700">
-                Active Listings
-              </h3>
-              <p className="mt-2 text-3xl font-bold text-orange-600">12</p>
-            </div>
-            <div className="bg-white shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-lg font-semibold text-gray-700">
-                Pending Orders
-              </h3>
+            <div className="relative bg-gradient-to-br from-white to-blue-50 shadow-lg rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
+              {/* Decorative Element */}
+              <div className="absolute top-0 left-0 w-12 h-12 bg-blue-100 rounded-full -translate-x-4 -translate-y-4 opacity-50"></div>
 
-              <p className="mt-2 text-3xl font-bold text-green-600">5</p>
+              {/* Icon */}
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                  <FaHotel className="text-blue-600" /> Pending Bookings
+                </h3>
+              </div>
 
+              {/* Number of Orders */}
+
+              <p className="text-sm text-gray-500">Awaiting Confirmation</p>
+
+              {/* Button */}
               <button
                 onClick={() =>
                   router.push(`/dashboard/vendor/orders?vendorId=${vendor?.id}`)
                 }
-                className="text-white font-semibold text-xs p-2 border-r-2  bg-blue-700   h-[24px]"
+                className="mt-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold text-sm py-2 px-4 rounded-full hover:from-blue-700 hover:to-blue-900 transition-all duration-300 shadow-md hover:shadow-lg"
               >
-                View orders
+                View Bookings
               </button>
             </div>
           </div>
