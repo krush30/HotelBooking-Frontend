@@ -62,7 +62,7 @@ export default function CustomerBookingsComponent() {
     };
 
     if (customerId) fetchBookings();
-  }, [customerId]);
+  }, [customerId, router]);
 
   return (
     <>

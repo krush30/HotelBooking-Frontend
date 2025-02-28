@@ -57,7 +57,7 @@ export default function HomePage() {
       }
     };
     fetchListings();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     console.log("listing:", listings);
