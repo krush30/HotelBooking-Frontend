@@ -21,7 +21,8 @@ export default function VendorListingsModal() {
   // Fetch token after component mounts
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setToken(localStorage.getItem("token"));
+      const storedToken = localStorage.getItem("token");
+      setToken(storedToken);
     }
   }, []);
 

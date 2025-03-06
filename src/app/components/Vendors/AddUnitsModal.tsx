@@ -46,7 +46,10 @@ export default function AddUnitsModal({ isOpen, onClose }: AddUnitsModalProps) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96 mt-72">
+      <div
+        className="bg-white p-6 rounded-lg shadow-lg w-96 mt-72 ml-72 z-10000000"
+        style={{ zIndex: 1000 }}
+      >
         <h2 className="text-xl font-semibold mb-4">Add New Unit</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input

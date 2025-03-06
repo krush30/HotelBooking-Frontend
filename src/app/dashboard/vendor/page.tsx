@@ -161,31 +161,27 @@ export default function VendorDashboard() {
 
           {/* Stats/Quick Info Section */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="relative bg-gradient-to-br from-white to-blue-50 shadow-lg rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
-              {/* Decorative Element */}
-              <div className="absolute top-0 left-0 w-12 h-12 bg-blue-100 rounded-full -translate-x-4 -translate-y-4 opacity-50"></div>
+            {/* Decorative Element */}
+            <div className=" w-12 h-12 bg-blue-100 rounded-full -translate-x-4 -translate-y-4 opacity-50"></div>
 
-              {/* Icon */}
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
-                  <FaHotel className="text-blue-600" /> Pending Bookings
-                </h3>
-              </div>
-
-              {/* Number of Orders */}
-
-              <p className="text-sm text-gray-500">Awaiting Confirmation</p>
-
-              {/* Button */}
-              <button
-                onClick={() =>
-                  router.push(`/dashboard/vendor/orders?vendorId=${vendor?.id}`)
-                }
-                className="mt-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold text-sm py-2 px-4 rounded-full hover:from-blue-700 hover:to-blue-900 transition-all duration-300 shadow-md hover:shadow-lg"
-              >
-                View Bookings
-              </button>
+            {/* Icon */}
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                <FaHotel className="text-blue-600" /> Pending Bookings
+              </h3>
             </div>
+
+            <p className="text-sm text-gray-500"></p>
+
+            {/* Button */}
+            <button
+              onClick={() =>
+                router.push(`/dashboard/vendor/orders?vendorId=${vendor?.id}`)
+              }
+              className="mt-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold text-sm py-2 px-4 rounded-full hover:from-blue-700 hover:to-blue-900 transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              View Bookings
+            </button>
           </div>
         </div>
       </main>
