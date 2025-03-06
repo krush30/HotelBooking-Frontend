@@ -19,13 +19,15 @@ export default function VendorListingsModal() {
   const vendorId = searchParams.get("vendorId");
 
   useEffect(() => {
-    const storedToken = window.localStorage.getItem("token");
-    setToken(storedToken ? storedToken : null);
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("token");
+      setToken(storedToken);
+    }
   }, []);
 
   useEffect(() => {
     const fetchListings = async () => {
-      if (!token || !vendorId) return; // Ensure token is available
+      if (!token || !vendorId) return;
 
       try {
         const response = await fetch(
@@ -53,6 +55,10 @@ export default function VendorListingsModal() {
     if (token) fetchListings();
   }, [token, vendorId]);
 
+  if (typeof window === "undefined") {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
       <h2 className="text-2xl font-bold text-gray-800 mb-6">My Listings</h2>
@@ -74,7 +80,6 @@ export default function VendorListingsModal() {
                 ${listing.pricing}/night
               </p>
 
-              {/* Facilities */}
               {listing.facilities.length > 0 && (
                 <div className="mt-2 flex flex-wrap gap-2">
                   {listing.facilities.map((facility, index) => (
