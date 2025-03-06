@@ -15,10 +15,9 @@ export default function VendorListingsModal() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState<string | null>(null);
-
   const searchParams = useSearchParams();
   const vendorId = searchParams.get("vendorId");
-  // Fetch token after component mounts
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("token");
@@ -53,7 +52,7 @@ export default function VendorListingsModal() {
       }
     };
 
-    fetchListings();
+    if (token) fetchListings();
   }, [token, vendorId]);
 
   return (
