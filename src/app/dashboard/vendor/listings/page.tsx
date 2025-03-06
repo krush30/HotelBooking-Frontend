@@ -19,10 +19,8 @@ export default function VendorListingsModal() {
   const vendorId = searchParams.get("vendorId");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedToken = localStorage.getItem("token");
-      setToken(storedToken);
-    }
+    const storedToken = window.localStorage.getItem("token");
+    setToken(storedToken ? storedToken : null);
   }, []);
 
   useEffect(() => {
